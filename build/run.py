@@ -1105,7 +1105,7 @@ def main():
         webrtc_commit=version_file['WEBRTC_COMMIT'],
         webrtc_build_version=version_file['WEBRTC_BUILD_VERSION'])
 
-    print("Building for version_file: ", version_file)
+    print("Building for version_info: ", version_info)
     return
     if args.op == 'build':
         mkdir_p(source_dir)
