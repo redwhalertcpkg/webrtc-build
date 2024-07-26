@@ -146,6 +146,8 @@ def read_version_file(path: str) -> Dict[str, str]:
             continue
 
         [a, b] = map(lambda x: x.strip(), line.split('=', 2))
+        print("read_version_file: ", a)
+        print("read_version_file2: ", b)
         versions[a] = b.strip('"')
 
     return versions
@@ -1103,6 +1105,8 @@ def main():
         webrtc_commit=version_file['WEBRTC_COMMIT'],
         webrtc_build_version=version_file['WEBRTC_BUILD_VERSION'])
 
+    print("Building for version_file: ", version_file)
+    return
     if args.op == 'build':
         mkdir_p(source_dir)
         mkdir_p(build_dir)
