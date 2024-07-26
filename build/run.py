@@ -1106,7 +1106,7 @@ def main():
         webrtc_build_version=version_file['WEBRTC_BUILD_VERSION'])
 
     commit = version_info.webrtc_commit
-    if args.commit:
+    if args.commit and args.commit != '':
         commit = args.commit
             
     print("Building for commit: ", commit)
