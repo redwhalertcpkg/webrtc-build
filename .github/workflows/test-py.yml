@@ -6,7 +6,7 @@ on:
       commitHash:
         description: 'webrtc-sdk commit hash'
         default: ''
-        required: true
+        required: false
   # push:
   #   paths-ignore:
   #     - '**.md'
@@ -29,7 +29,6 @@ jobs:
       matrix:
         name:
           - windows_x86_64
-          - windows_arm64
     runs-on: windows-2019
     steps:
     - uses: actions/checkout@v2
