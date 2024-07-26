@@ -7,17 +7,17 @@ on:
         description: 'webrtc-sdk commit hash'
         default: ''
         required: true
-  push:
-    paths-ignore:
-      - '**.md'
-      - 'LICENSE'
-      - 'NOTICE'
-      - '.gitignore'
-      - '.dockerignore'
-    branches-ignore:
-      - daily
-    tags:
-      - '*'
+  # push:
+  #   paths-ignore:
+  #     - '**.md'
+  #     - 'LICENSE'
+  #     - 'NOTICE'
+  #     - '.gitignore'
+  #     - '.dockerignore'
+  #   branches-ignore:
+  #     - daily
+  #   tags:
+  #     - '*'
 
 jobs:
   build-windows:
