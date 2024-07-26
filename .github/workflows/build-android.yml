@@ -1,4 +1,4 @@
-name: build
+name: build-android
 
 on:
   workflow_dispatch:
@@ -49,8 +49,6 @@ jobs:
     name: Create Release
     if: contains(github.ref, 'tags/m')
     needs:
-      - build-windows
-      - build-macos
       - build-linux
     runs-on: ubuntu-20.04
     steps:
