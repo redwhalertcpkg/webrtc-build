@@ -1,0 +1,70 @@
+name: test-py
+
+on:
+  workflow_dispatch:
+    inputs:
+      commitHash:
+        description: 'webrtc-sdk commit hash'
+        default: ''
+        required: true
+  # push:
+  #   paths-ignore:
+  #     - '**.md'
+  #     - 'LICENSE'
+  #     - 'NOTICE'
+  #     - '.gitignore'
+  #     - '.dockerignore'
+  #   branches-ignore:
+  #     - daily
+  #   tags:
+  #     - '*'
+
+jobs:
+  build-windows:
+    defaults:
+      run:
+        working-directory: .\\build
+    strategy:
+      fail-fast: false
+      matrix:
+        name:
+          - windows_x86_64
+          - windows_arm64
+    runs-on: windows-2019
+    steps:
+    - uses: actions/checkout@v2
+    - run: "& .\\build.${{ matrix.name }}.ps1 \"${{ github.event.inputs.commitHash }}\""
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v1
+      with:
+        name: webrtc.${{ matrix.name }}.zip
+        path: build\_package\${{ matrix.name }}\webrtc.zip
+  build-linux:
+    defaults:
+      run:
+        working-directory: ./build
+    strategy:
+      fail-fast: false
+      matrix:
+        name:
+          # - raspberry-pi-os_armv6
+          # - raspberry-pi-os_armv7
+          # - raspberry-pi-os_armv8
+          # - ubuntu-18.04_armv8
+          # - ubuntu-20.04_armv8
+          # - ubuntu-18.04_x86_64
+          # - ubuntu-20.04_x86_64
+          # - ubuntu-22.04_x86_64
+          - android
+    runs-on: buildjet-4vcpu-ubuntu-2204
+    steps:
+    - uses: actions/checkout@v2
+    - name: Disk Cleanup
+      run: |
+        df -h
+    - run: ./build.${{ matrix.name }}.sh "${{ github.event.inputs.commitHash }}"
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v1
+      with:
+        name: webrtc.${{ matrix.name }}.tar.gz
+        path: build/_package/${{ matrix.name }}/webrtc.tar.gz
