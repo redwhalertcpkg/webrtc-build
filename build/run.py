@@ -266,7 +266,7 @@ def get_webrtc(source_dir, patch_dir, version, target,
         with cd(webrtc_source_dir):
             cmd(['gclient'])
             shutil.copyfile(os.path.join(BASE_DIR, '.gclient'), '.gclient')
-            cmd(['git', 'clone', 'https://github.com/webrtc-sdk/webrtc.git', 'src'])
+            cmd(['git', 'clone', 'https://github.com/redwhalertcpkg/webrtc.git', 'src'])
             if target == 'android':
                 with open('.gclient', 'a') as f:
                     f.write("target_os = [ 'android' ]\n")
